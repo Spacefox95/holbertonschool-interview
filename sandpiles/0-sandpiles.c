@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
- * sandpiles_sum - add to grid
+ * sandpiles_sum - add to grid.
  * @grid1: first grid
  * @grid2: second grid to add
  */
