@@ -26,6 +26,11 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 	}
 }
 
+/**
+ * topple - Reduce the value of index if > 4
+ * @grid1: the grid to topple
+ */
+
 void topple(int grid1[3][3])
 {
 	int x, y;
@@ -66,6 +71,12 @@ void topple(int grid1[3][3])
 	}
 }
 
+/**
+ * stable_grid - check that every element of the grid is < 4
+ * @grid1: the grid to check
+ * Return: 0 if the grid is unstable, 1 if stable
+ */
+
 int stable_grid(int grid1[3][3])
 {
 	int x, y;
@@ -80,6 +91,11 @@ int stable_grid(int grid1[3][3])
 	}
 	return (1);
 }
+
+/**
+ * print_topple - display the grid
+ * @grid: the grid to display
+ */
 
 void print_topple(int grid[3][3])
 {
