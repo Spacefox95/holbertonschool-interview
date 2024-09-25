@@ -10,7 +10,7 @@
 
 int slide_line(int *line, size_t size, int direction)
 {
-	int i, y;
+	size_t i;
 
 	if (direction == SLIDE_RIGHT)
 		reverse_array(line, size);
@@ -40,8 +40,8 @@ int slide_line(int *line, size_t size, int direction)
 
 void slide(int *line, size_t size)
 {
-	int i;
-	int index = 0;
+	size_t i;
+	size_t index = 0;
 
 	for (i = 0; i < size; i++)
 	{
@@ -67,7 +67,7 @@ void slide(int *line, size_t size)
 
 void merge(int *line, size_t size)
 {
-	int i, j;
+	size_t i, j;
 
 	for (i = 0; i < size; i++)
 	{
@@ -94,7 +94,7 @@ void merge(int *line, size_t size)
 
 void reverse_array(int *line, size_t size)
 {
-	int i;
+	size_t i;
 	int temp;
 
 	for (i = 0; i < size / 2; i++)
