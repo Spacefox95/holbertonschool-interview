@@ -10,26 +10,19 @@
 
 int slide_line(int *line, size_t size, int direction)
 {
-	size_t i;
+	if (size == 0)
+		return (0);
 
 	if (direction == SLIDE_RIGHT)
 		reverse_array(line, size);
 
-	for (i = 0; i < size; i++)
-	{
-		if (line[i] == line[i + 1])
-		{
-			line[i] += line[i + 1];
-			line[i + 1] = 0;
-		}
-		slide(line, size);
-		merge(line, size);
+	slide(line, size);
+	merge(line, size);
+	slide(line, size);
 
-		if (direction == SLIDE_RIGHT)
-			reverse_array(line, size);
-		return (1);
-	}
-	return (0);
+	if (direction == SLIDE_RIGHT)
+		reverse_array(line, size);
+	return (1);
 }
 
 /**
@@ -47,15 +40,13 @@ void slide(int *line, size_t size)
 	{
 		if (line[i] != 0)
 		{
-			line[index] = line[i];
-			index++;
+			line[index++] = line[i];
 		}
 	}
 
 	while (index < size)
 	{
-		line[index] = 0;
-		index++;
+		line[index++] = 0;
 	}
 }
 
@@ -67,7 +58,7 @@ void slide(int *line, size_t size)
 
 void merge(int *line, size_t size)
 {
-	size_t i, j;
+	size_t i;
 
 	for (i = 0; i < size; i++)
 	{
@@ -75,12 +66,6 @@ void merge(int *line, size_t size)
 		{
 			line[i] += line[i + 1];
 			line[i + 1] = 0;
-
-			for (j = i + 1; j < size - 1; j++)
-			{
-				line[j] = line[j + 1];
-			}
-			line[size - 1] = 0;
 			i++;
 		}
 	}
