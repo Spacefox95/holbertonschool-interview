@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 """
 Algorithm to check if all the boxes can be opened
 """
