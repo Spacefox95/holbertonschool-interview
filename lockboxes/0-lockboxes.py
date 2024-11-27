@@ -17,9 +17,9 @@ def canUnlockAll(boxes: list[list]):
             if key not in unlocked and key < n:
                 unlocked.add(key)
                 to_explore.append(key)
-    
+
     if n == len(unlocked):
         return True
-    
+
     else:
         return False
