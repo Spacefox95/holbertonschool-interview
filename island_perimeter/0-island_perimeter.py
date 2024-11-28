@@ -12,7 +12,6 @@ def island_perimeter(grid: list[list[int]]) -> int:
     for row in range(rows):
         for col in range(cols):
             if grid[row][col] == 1:
-                print(grid[row][col])
                 if row > 0 and grid[row - 1][col] == 0:
                     perimeter += 1
                 if row == 0:
