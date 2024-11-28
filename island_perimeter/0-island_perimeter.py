@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+""" Algorithm to determine if the perimeter if island"""
+
 def island_perimeter(grid: list[list[int]]) -> int:
 
 	perimeter = 0
