@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Determines if a data set represents a valide utf_8"""
 
 def validUTF8(data):
