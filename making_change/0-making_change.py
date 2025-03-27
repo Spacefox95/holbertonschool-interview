@@ -15,8 +15,6 @@ def makeChange(coins, total):
             coin_number = total // coin
             count += coin_number
             total -= coin_number * coin
-            print(f"Using {coin_number} coins of {coin}, remaining total: {total}, coins used: {count}")
         if total == 0:
-            print(f"Final count: {count}")
             return count
     return -1
