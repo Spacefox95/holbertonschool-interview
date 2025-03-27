@@ -7,4 +7,4 @@ makeChange = __import__('0-making_change').makeChange
 
 print(makeChange([20], 20))
 
-print(makeChange([1256, 54, 48, 16, 102], 1453))
+print(makeChange([1256, 102, 54, 16, 1], 197))
