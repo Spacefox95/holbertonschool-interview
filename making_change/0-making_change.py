@@ -13,8 +13,9 @@ def makeChange(coins, total):
     coins.reverse()
     for coin in coins:
         if (total // coin) > 0:
-            count += total // coin
-            total -= (total // coin) * coin
+            coin_number = total // coin
+            count += coin_number
+            total -= coin_number * coin
         if total == 0:
             return count
     return -1
