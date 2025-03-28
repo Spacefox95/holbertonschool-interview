@@ -3,16 +3,53 @@
 #include <stdio.h>
 
 /**
- * swap_values - Swaps values of 2 nodes
- * @a: pointer to first node
- * @b: pointer to second node
+ * enqueue - Adds a node to the end of the queue
+ * @head: Pointer to the head of the queue
+ * @node: Node to enqueue
  */
-void swap_values(heap_t *a, heap_t *b)
+void enqueue(queue_t **head, heap_t *node)
 {
-	int temp = a->n;
+	queue_t *new = malloc(sizeof(queue_t)), *tmp;
 
-	a->n = b->n;
-	b->n = temp;
+	if (!new)
+		return;
+
+	new->node = node;
+	new->next = NULL;
+
+	if (!*head)
+	{
+		*head = new;
+		return;
+	}
+
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+
+	tmp->next = new;
+}
+
+/**
+ * dequeue - Removes and returns the first node in the queue
+ * @head: Pointer to the head of the queue
+ *
+ * Return: Node from the queue
+ */
+heap_t *dequeue(queue_t **head)
+{
+	queue_t *tmp;
+	heap_t *node;
+
+	if (!head || !*head)
+		return (NULL);
+
+	tmp = *head;
+	node = tmp->node;
+	*head = tmp->next;
+	free(tmp);
+
+	return (node);
 }
 
 /**
@@ -22,30 +59,22 @@ void swap_values(heap_t *a, heap_t *b)
  */
 heap_t *get_last_node(heap_t *root)
 {
-	heap_t *last = NULL;
-	size_t height = 0, size = 0, mask;
-	heap_t *node = root;
+	queue_t *queue = NULL;
+	heap_t *node = NULL;
 
-	for (size_t tmp = 1; node; tmp <<= 1)
+	enqueue(&queue, root);
+	while (queue)
 	{
-		height++;
-		node = node->left;
+		node = dequeue(&queue);
+		if (node->left)
+			enqueue(&queue, node->left);
+		if (node->right)
+			enqueue(&queue, node->right);
 	}
-	size = (1 << height) - 1;
-	mask = 1 << (height - 2);
-	node = root;
 
-	while (mask)
-	{
-		if (size & mask)
-			node = node->right;
-		else
-			node = node->left;
-		mask >>= 1;
-	}
-	last = node;
-	return (last);
+	return (node);
 }
+
 
 /**
  * sift_down - restores heap property by shifting down
@@ -53,19 +82,29 @@ heap_t *get_last_node(heap_t *root)
  */
 void sift_down(heap_t *node)
 {
-	heap_t *largest;
+	heap_t *max;
+	int tmp;
 
-	while (node->left)
+	while (node)
 	{
-		largest = node->left;
-		if (node->right && node->right->n > node->left->n)
-			largest = node->right;
-		if (node->n >= largest->n)
+		max = node;
+
+		if (node->left && node->left->n > max->n)
+			max = node->left;
+		if (node->right && node->right->n > max->n)
+			max = node->right;
+
+		if (max == node)
 			break;
-		swap_values(node, largest);
-		node = largest;
+
+		tmp = node->n;
+		node->n = max->n;
+		max->n = tmp;
+
+		node = max;
 	}
 }
+
 
 /**
  * heap_extract - Etracts the root node of a Max Binary Heap
@@ -74,7 +113,7 @@ void sift_down(heap_t *node)
  */
 int heap_extract(heap_t **root)
 {
-	heap_t *last, *parent;
+	heap_t *last;
 	int value;
 
 	if (!root || !*root)
@@ -91,13 +130,12 @@ int heap_extract(heap_t **root)
 	}
 
 	last = get_last_node(*root);
-	swap_values(*root, last);
+	(*root)->n = last->n;
 
-	parent = last->parent;
-	if (parent->left == last)
-		parent->left = NULL;
+	if (last->parent->left == last)
+		last->parent->left = NULL;
 	else
-		parent->right = NULL;
+		last->parent->right = NULL;
 
 	free(last);
 	sift_down(*root);
