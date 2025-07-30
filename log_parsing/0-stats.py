@@ -20,8 +20,7 @@ def main():
     total_size = 0
     status_count = defaultdict(int)
     pattern = re.compile(
-        r'^(\S+) - \[[^\]]+\] "\S+ \S+ \S+" (\d{3}) (\d+)$'
-    )
+        r'^(\S+) - \[(.*?)\] "GET .* HTTP/1\.1" (\d{3}) (\d+)$')
 
     try:
         for line in sys.stdin:
