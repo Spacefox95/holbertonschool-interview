@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 
+""" Read the stdin and compute metrics """
+
 from collections import defaultdict
 import re
 import sys
-
-""" Read the stdin and compute metrics """
 
 
 def print_stats(total_size, status_code):
     """Print the status code and file size"""
     print(f"File size: {total_size}")
-    for code in sorted(status_code.key()):
+    for code in sorted(status_code.keys()):
         print(f"{code}: {status_code[code]}")
 
 
