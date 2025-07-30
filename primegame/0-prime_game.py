@@ -4,6 +4,7 @@
 
 
 def isWinner(x, nums):
+    """ Calculate the winner """
     if x < 1 or not nums:
         return None
 
