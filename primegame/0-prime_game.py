@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+""" Determine who is the winner of each game """
+
 
 def isWinner(x, nums):
     if x < 1 or not nums:
