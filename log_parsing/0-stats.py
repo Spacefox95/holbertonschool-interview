@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" Read the stdin and compute metrics """
+"""Read the stdin and compute metrics"""
 
 from collections import defaultdict
 import re
@@ -20,8 +20,7 @@ def main():
     total_size = 0
     status_count = defaultdict(int)
     pattern = re.compile(
-        r'^(\S+) - \[(.*?)\] "GET /projects/260 HTTP/1\.1" (\d{3}) (\d+)$'
-    )
+        r'^(\S+) - \[(.*?)\] "GET .* HTTP/1\.1" (\d{3}) (\d+)$')
 
     try:
         for line in sys.stdin:
