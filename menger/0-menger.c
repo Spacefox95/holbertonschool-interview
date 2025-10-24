@@ -1,6 +1,11 @@
 #include "menger.h"
 #include <stdio.h>
 
+/**
+ * menger - Create a fractal cube
+ * @level: number of side square
+ */
+
 void menger(int level) {
     if (level < 0)
         return;
