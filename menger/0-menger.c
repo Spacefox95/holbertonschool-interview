@@ -2,28 +2,34 @@
 #include <stdio.h>
 
 /**
- * menger - Create a fractal cube
- * @level: number of side square
+ * menger - Draws a 2D representation of the Menger sponge
+ * @level: The level of the Menger sponge to draw
+ *
+ * Return: Nothing
  */
-
 void menger(int level)
 {
+	int size;
+	int i, j;
+	int x, y;
+	int print;
+	int pow;
+
 	if (level < 0)
 		return;
 
-	int size = 1;
-
-	for (int i = 0; i < level; i++)
-	{
+	size = 1;
+	for (pow = 0; pow < level; pow++)
 		size *= 3;
-	}
 
-	for (int i = 0; i < size; i++)
+	for (i = 0; i < size; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (j = 0; j < size; j++)
 		{
-			int x = i, y = j;
-			int print = 1;
+			x = i;
+			y = j;
+			print = 1;
+
 			while (x > 0 || y > 0)
 			{
 				if (x % 3 == 1 && y % 3 == 1)
@@ -34,6 +40,7 @@ void menger(int level)
 				x /= 3;
 				y /= 3;
 			}
+
 			putchar(print ? '#' : ' ');
 		}
 		putchar('\n');
