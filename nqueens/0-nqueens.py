@@ -13,7 +13,8 @@ def print_usage_and_exit(message, status):
 def is_safe(board, row, col, n):
     """Check if a queen can be placed at board[row][col] safely"""
     for i in range(row):
-        if board[i] == col or board[i] - i == col - row or board[i] + i == col + row:
+        if board[i] == col or board[i] - i == col - row or \
+                board[i] + i == col + row:
             return False
     return True
 
